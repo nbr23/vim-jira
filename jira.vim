@@ -82,7 +82,7 @@ function! JiraSearch()
             echohl JiraUnknown
         endif
         echo detail.text
-        echohl None " Reset highlighting
+        echohl None
     endfor
     echo ""
 
