@@ -109,7 +109,7 @@ function! JiraSearch()
         return
     endif
 
-    let ticket_key = ticket_map[selection_num] . ' - '
+    let ticket_key = ticket_map[selection_num] . ' - 'ticket_details[selection_num - 1].text
     execute "normal! i" . ticket_key
 
     echo "Inserted: " . ticket_key
