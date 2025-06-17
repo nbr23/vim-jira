@@ -18,6 +18,7 @@ Inserted: CMP-456
 
 ## Requirements
 - Python 3.x
+- `uv`
 - `requests` library (`pip install requests`)
 - vim
 - JIRA API token
