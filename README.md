@@ -2,6 +2,8 @@
 
 A simple vim function and python script that let you search JIRA tickets and insert ticket IDs directly into your documents / commit message.
 
+![](docs/demo.gif)
+
 ## Example
 
 ```
