@@ -4,20 +4,6 @@ A simple vim function and python script that let you search JIRA tickets and ins
 
 ![](docs/demo.gif)
 
-## Example
-
-```
-JIRA search: login bug
-JIRA Search Results:
-===================
-1. CMP-123 [Bug] (In Progress) - Fix login issue on mobile devices
-2. CMP-456 [Epic] (To Do) - User authentication improvements
-3. CMP-789 [Story] (Done) - Login bug affects Safari users
-
-Select ticket (1-3) or q to quit: 2
-Inserted: CMP-456
-```
-
 ## Requirements
 - Python 3.x
 - `uv`
