@@ -4,7 +4,7 @@ endif
 let g:loaded_jira_plugin = 1
 
 if !exists('g:jira_script_path')
-    let g:jira_script_path = 'uv run --script https://raw.githubusercontent.com/nbr23/vim-jira/refs/heads/master/jira.py'
+    let g:jira_script_path = '/usr/local/bin/vim-jira.py'
 endif
 
 if !exists('g:jira_search_mapping')
