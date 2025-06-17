@@ -17,14 +17,14 @@ if [ ! -f "$JIRA_CONFIG" ]; then
     read -p "Username: " JIRA_USERNAME
     read -s -p "API Token: " JIRA_API_TOKEN
     echo
-    read -p "Project prefix: " JIRA_PREFIX
+    read -p "Project: " JIRA_PROJECT
     
     cat > "$JIRA_CONFIG" << EOF
 {
   "url": "$JIRA_URL",
   "username": "$JIRA_USERNAME",
   "api_token": "$JIRA_API_TOKEN",
-  "prefix": "$JIRA_PREFIX"
+  "project": "$JIRA_PROJECT"
 }
 EOF
     
