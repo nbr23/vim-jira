@@ -59,7 +59,7 @@ function! JiraSearch()
 
         call add(choices, choice_text)
         call add(ticket_details, {'text': choice_text, 'issuetype': issuetype})
-        let ticket_map[index] = key
+        let ticket_map[index] = key . ' - ' . summary
         let index += 1
     endfor
 
@@ -109,7 +109,7 @@ function! JiraSearch()
         return
     endif
 
-    let ticket_key = ticket_map[selection_num] . ' - 'ticket_details[selection_num - 1].text
+    let ticket_key = ticket_map[selection_num]
     execute "normal! i" . ticket_key
 
     echo "Inserted: " . ticket_key
