@@ -44,7 +44,6 @@ function! JiraSearch()
     endif
 
     let choices = []
-    let ticket_map = {}
     let ticket_details = []
     let index = 1
 
@@ -58,8 +57,7 @@ function! JiraSearch()
         let choice_text = printf('%d. %s [%s] (%s) - %s', index, key, issuetype, status, display_summary)
 
         call add(choices, choice_text)
-        call add(ticket_details, {'text': choice_text, 'issuetype': issuetype})
-        let ticket_map[index] = key . ' - ' . summary
+        call add(ticket_details, {'text': choice_text, 'issuetype': issuetype, 'key': key, 'summary': summary, 'status': status})
         let index += 1
     endfor
 
@@ -109,10 +107,10 @@ function! JiraSearch()
         return
     endif
 
-    let ticket_key = ticket_map[selection_num]
-    execute "normal! i" . ticket_key
+    let ticket_key = ticket_details[selection_num - 1].key
+    execute "normal! i" . ticket_key . " - "
 
-    echo "Inserted: " . ticket_key
+    echo "Selected " . ticket_details[selection_num - 1].key . ": " . ticket_details[selection_num - 1].summary
 endfunction
 
 command! JiraSearch call JiraSearch()
