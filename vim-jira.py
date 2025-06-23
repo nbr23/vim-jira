@@ -112,6 +112,7 @@ class JiraSearcher:
                 "priority": fields.get("priority", {}).get("name", "Unknown"),
                 "issuetype": fields.get("issuetype", {}).get("name", "Unknown"),
                 "assignee": self.get_assignee_name(fields.get("assignee")),
+                "assignedToMe": fields.get("assignee") and fields.get("assignee", {}).get("emailAddress") == self.username,
                 "url": f"{self.jira_url}/browse/{issue.get('key', '')}",
             }
 

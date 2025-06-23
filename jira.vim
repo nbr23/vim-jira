@@ -17,6 +17,12 @@ highlight default JiraTask ctermfg=blue guifg=Blue
 highlight default JiraEpic ctermfg=magenta guifg=Magenta
 highlight default JiraSubtask ctermfg=cyan guifg=Cyan
 highlight default JiraUnknown ctermfg=yellow guifg=Yellow
+highlight default JiraBugBold ctermfg=red guifg=Red cterm=bold gui=bold
+highlight default JiraStoryBold ctermfg=green guifg=green cterm=bold gui=bold
+highlight default JiraTaskBold ctermfg=blue guifg=Blue cterm=bold gui=bold
+highlight default JiraEpicBold ctermfg=magenta guifg=Magenta cterm=bold gui=bold cterm=bold gui=bold
+highlight default JiraSubtaskBold ctermfg=cyan guifg=Cyan cterm=bold gui=bold
+highlight default JiraUnknownBold ctermfg=yellow guifg=Yellow cterm=bold gui=bold
 
 function! JiraSearch()
     let search_term = input('JIRA search: ')
@@ -52,12 +58,14 @@ function! JiraSearch()
         let summary = get(ticket, 'summary', 'No summary')
         let issuetype = get(ticket, 'issuetype', 'Unknown')
         let status = get(ticket, 'status', 'Unknown')
+        let assignee = get(ticket, 'assignee', 'Unassigned')
+        let assignedToMe = get(ticket, 'assignedToMe', 0)
 
         let display_summary = len(summary) > 80 ? summary[:77] . '...' : summary
-        let choice_text = printf('%d. %s [%s] (%s) - %s', index, key, issuetype, status, display_summary)
+        let choice_text = printf('%d. %s [%s] (%s) - %s%s', index, key, issuetype, status, display_summary, assignee != 'Unassigned' ? ' | ' . assignee : '')
 
         call add(choices, choice_text)
-        call add(ticket_details, {'text': choice_text, 'issuetype': issuetype, 'key': key, 'summary': summary, 'status': status})
+        call add(ticket_details, {'text': choice_text, 'issuetype': issuetype, 'key': key, 'summary': summary, 'status': status, 'assignee': assignee, 'assignedToMe': assignedToMe})
         let index += 1
     endfor
 
@@ -67,17 +75,41 @@ function! JiraSearch()
     for detail in ticket_details
         let l:issueTypeNormalized = tolower(detail.issuetype)
         if l:issueTypeNormalized ==# 'bug'
-            echohl JiraBug
+            if detail.assignedToMe
+                echohl JiraBugBold
+            else
+                echohl JiraBug
+            endif
         elseif l:issueTypeNormalized ==# 'story'
-            echohl JiraStory
+            if detail.assignedToMe
+                echohl JiraStoryBold
+            else
+                echohl JiraStory
+            endif
         elseif l:issueTypeNormalized ==# 'task'
-            echohl JiraTask
+            if detail.assignedToMe
+                echohl JiraTaskBold
+            else
+                echohl JiraTask
+            endif
         elseif l:issueTypeNormalized ==# 'epic'
-            echohl JiraEpic
+            if detail.assignedToMe
+                echohl JiraEpicBold
+            else
+                echohl JiraEpic
+            endif
         elseif l:issueTypeNormalized =~# 'sub-task' || l:issueTypeNormalized =~# 'subtask'
-            echohl JiraSubtask
+            if detail.assignedToMe
+                echohl JiraSubtaskBold
+            else
+                echohl JiraSubtask
+            endif
         else
-            echohl JiraUnknown
+            if detail.assignedToMe
+                echohl JiraUnknownBold
+            else
+                echohl JiraUnknown
+            endif
         endif
         echo detail.text
         echohl None
