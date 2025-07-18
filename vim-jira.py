@@ -49,6 +49,7 @@ class JiraSearcher:
             jql_parts.append(f'project = "{self.project}"')
 
         jql_parts.append('status != "Canceled"')
+        jql_parts.append('status != "Done"')
 
         jql = " AND ".join([f"({part})" for part in jql_parts])
 
