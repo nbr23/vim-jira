@@ -4,7 +4,7 @@ endif
 let g:loaded_jira_plugin = 1
 
 if !exists('g:jira_script_path')
-    let g:jira_script_path = '/usr/local/bin/vim-jira.py'
+    let g:jira_script_path = 'uvx jira-buddy --json --own'
 endif
 
 if !exists('g:jira_search_mapping')

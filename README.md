@@ -1,13 +1,13 @@
 # vim-jira
 
-A simple vim function and python script that let you search JIRA tickets and insert ticket IDs directly into your documents / commit message.
+A simple vim function calls [jira-buddy](https://github.com/nbr23/jira-buddy/) to let you search JIRA tickets and insert ticket IDs directly into your documents / commit message.
 
 ![](docs/demo.gif)
 
 ## Requirements
 - Python 3.x
 - `uv`
-- `requests` library (`pip install requests`)
+- [`jira-buddy`](https://github.com/nbr23/jira-buddy/)
 - vim
 - JIRA API token
 
